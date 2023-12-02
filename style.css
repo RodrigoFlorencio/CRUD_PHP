@@ -20,6 +20,15 @@
     font-size: 30px;
     font-weight: bold;
 }
+.menu {
+    display: flex;
+    justify-content: flex-start;
+    margin: 10px 0 0 0;
+}
+.menu a {
+    color: #000;
+    padding: 0 10px;
+}
 .formulario {
     width: 100%;
     margin: 50px 0 0 0;
@@ -35,4 +44,19 @@
 }
 .btn-enviar button {
     width: 100px;
+}
+
+
+@media (max-width: 500px) {
+
+    .table-dark td, .table-dark th, .table-dark thead th {
+        border-color: #454d55;
+        text-align: center;
+    }
+    .formulario .col-3 {
+        min-width: 50%;
+        flex: 1;
+        margin: 0 0 15px 0;
+    }
+
 }

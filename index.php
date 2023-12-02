@@ -27,12 +27,14 @@
 
     <?php
 
-    session_start();
+    /* session_start();
 
-    if ($_SESSION['erro_cadastro'] && !empty($_SESSION['erro_cadastro'])) {
-        $erroCadastro = $_SESSION['erro_cadastro'];
-        $_SESSION['erro_cadastro'] = '';
-    }
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+
+        header("Location: login.php");
+        exit();
+    } */
+
     $lista = [];
     $pdo = new PDO("mysql:dbname=rodr7545_gerencia_easy;host=rodrigoflorenciodev.com.br", "rodr7545_dbTeste", "@#Feeling21");
 
@@ -68,7 +70,15 @@
             </div>
         </div>
 
-        <a href="adicionar.php">ADD Funcionário</a>
+        <div class="row">
+
+            <div class="menu">
+                <a href="adicionar.php">ADD Funcionário</a>
+
+                <a href="logout.php">Sair</a>
+            </div>
+
+        </div>
 
         <div class="row">
 
@@ -93,48 +103,58 @@
         }
         ?>
 
-        <div class="row formulario">
+        <div class="row">
 
-            <table class="table table-dark">
+            <div class="formulario">
 
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">E-mail</th>
-                        <th scope="col">Telefone</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
+                <div class="table-responsive">
 
-                <?php foreach ($lista as $funcionario): ?>
+                    <table class="table table-dark">
 
-                <tbody>
-                    <tr>
-                        <th scope="row">
-                            <?=$funcionario['id'];?>
-                        </th>
-                        <td>
-                            <?=$funcionario['nome'];?>
-                        </td>
-                        <td>
-                            <?=$funcionario['email'];?>
-                        </td>
-                        <td>
-                            <?=$funcionario['telefone'];?>
-                        </td>
-                        <td>
-                            <a href="editar.php?id=<?=$funcionario['id'];?>">[ Editar ]</a>
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
 
-                            <a href="excluir.php?id=<?=$funcionario['id'];?>">[ Excluir ]</a>
-                        </td>
-                    </tr>
-                    
-                </tbody>
+                        <?php foreach ($lista as $funcionario) : ?>
 
-                <?php endforeach; ?>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">
+                                        <?= $funcionario['id']; ?>
+                                    </th>
+                                    <td>
+                                        <?= $funcionario['nome']; ?>
+                                    </td>
+                                    <td>
+                                        <?= $funcionario['email']; ?>
+                                    </td>
+                                    <td>
+                                        <?= $funcionario['telefone']; ?>
+                                    </td>
+                                    <td>
+                                        <a href="editar.php?id=<?= $funcionario['id']; ?>">Editar</a>
+                                    </td>
+                                    <td>
+                                        <a href="excluir.php?id=<?= $funcionario['id']; ?>">Excluir</a>
+                                    </td>
+                                </tr>
 
-            </table>
+                            </tbody>
+
+                        <?php endforeach; ?>
+
+                    </table>
+
+                </div>
+
+            </div>
 
         </div>
 

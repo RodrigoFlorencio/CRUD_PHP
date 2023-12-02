@@ -27,16 +27,13 @@
 
     <?php
 
-    session_start();
+    /* session_start();
 
-    if (!$_SESSION['autenticado']) {
-        header('Location: login.php');
-    }
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
-    if ($_SESSION['erro_cadastro'] && !empty($_SESSION['erro_cadastro'])) {
-        $erroCadastro = $_SESSION['erro_cadastro'];
-        $_SESSION['erro_cadastro'] = '';
-    }
+        header("Location: login.php");
+        exit();
+    } */
 
     $id = filter_input(INPUT_GET, 'id');
     if ($id) {
