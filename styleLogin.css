@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.texto-principal {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 50px 0 0 0;
+}
+.texto-principal p {
+    font-size: 30px;
+    font-weight: bold;
+}
+.formulario {
+    width: 100%;
+    margin: 50px 0 0 0;
+    display: flex;
+    justify-content: center;
+}
+.box-login {
+    width: 60%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.col-6 input {
+    width: 100%;
+    border-radius: 10px;
+    padding: 5px;
+    border: 1px solid black;
+}
+.btn-enviar {
+    margin: 30px 0 0 0;
+}
+.btn-enviar button {
+    width: 100px;
+    margin: 0 0 0 15px;
+}
