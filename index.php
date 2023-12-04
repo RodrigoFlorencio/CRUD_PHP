@@ -27,48 +27,16 @@
 
     <?php
 
-    /* session_start();
+    require 'config.php';
+    require 'dao/UsuarioDaoMysql.php';
 
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    $usuarioDao = new UsuarioDaoMysql($pdo);
 
-        header("Location: login.php");
-        exit();
-    } */
-
-    $lista = [];
-    $pdo = new PDO("mysql:dbname=rodr7545_gerencia_easy;host=rodrigoflorenciodev.com.br", "rodr7545_dbTeste", "@#Feeling21");
-
-    $sql = $pdo->query("SELECT * FROM funcionario_teste");
-
-    if ($sql->rowCount() > 0) {
-        $lista = $sql->fetchAll(PDO::FETCH_ASSOC);
-    }
+    $lista = $usuarioDao->findAll();
 
     ?>
 
     <div class="container">
-
-        <!-- Modal -->
-        <div class="modal fade <?php echo isset($erroCadastro) ? 'show' : ''; ?>" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="<?php echo isset($erroCadastro) ? 'display: block;' : ''; ?>">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <!-- <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div> -->
-                    <div class="modal-body">
-                        <?php echo isset($erroCadastro) ? $erroCadastro : ''; ?>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                            Close
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row">
 
@@ -96,13 +64,6 @@
 
         </div>
 
-        <?php
-        if (isset($_COOKIE['nomeUsuario'])) {
-            $nomeUser = $_COOKIE['nomeUsuario'];
-            echo "<p>" . $nomeUser . "</p>";
-        }
-        ?>
-
         <div class="row">
 
             <div class="formulario">
@@ -122,27 +83,32 @@
                             </tr>
                         </thead>
 
-                        <?php foreach ($lista as $funcionario) : ?>
+                        <?php foreach ($lista as $usuario):?>
 
                             <tbody>
                                 <tr>
                                     <th scope="row">
-                                        <?= $funcionario['id']; ?>
+                                        <?=$usuario->getId();?>
                                     </th>
+                                    
                                     <td>
-                                        <?= $funcionario['nome']; ?>
+                                        <?=$usuario->getNome();?>
                                     </td>
+
                                     <td>
-                                        <?= $funcionario['email']; ?>
+                                        <?=$usuario->getEmail();?>
                                     </td>
+
                                     <td>
-                                        <?= $funcionario['telefone']; ?>
+                                        <?=$usuario->getTelefone();?>
                                     </td>
+
                                     <td>
-                                        <a href="editar.php?id=<?= $funcionario['id']; ?>">Editar</a>
+                                        <a href="editar.php?id=<?=$usuario->getId();?>">Editar</a>
                                     </td>
+
                                     <td>
-                                        <a href="excluir.php?id=<?= $funcionario['id']; ?>">Excluir</a>
+                                        <a href="excluir.php?id=<?=$usuario->getId();?>">Excluir</a>
                                     </td>
                                 </tr>
 

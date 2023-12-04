@@ -25,41 +25,7 @@
         <h1>Cadastro PHP</h1>
     </div>
 
-    <?php
-
-    /* session_start();
-
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-
-        header("Location: login.php");
-        exit();
-    } */
-
-    ?>
-
     <div class="container">
-
-        <!-- Modal -->
-        <div class="modal fade <?php echo isset($erroCadastro) ? 'show' : ''; ?>" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="<?php echo isset($erroCadastro) ? 'display: block;' : ''; ?>">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <!-- <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div> -->
-                    <div class="modal-body">
-                        <?php echo isset($erroCadastro) ? $erroCadastro : ''; ?>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                            Close
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row">
 
@@ -77,14 +43,7 @@
 
         </div>
 
-        <?php
-            if (isset($_COOKIE['nomeUsuario'])) {
-                $nomeUser = $_COOKIE['nomeUsuario'];
-                echo "<p>" . $nomeUser . "</p>";
-            }
-        ?>
-
-        <form method="POST" action="form.php">
+        <form method="POST" action="adicionar_action.php">
 
             <div class="row formulario">
 
@@ -122,7 +81,7 @@
 
             </div>
 
-    </div>
+        </div>
 
     </div>
 

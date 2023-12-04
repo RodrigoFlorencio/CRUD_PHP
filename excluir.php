@@ -1,21 +1,22 @@
 <?php
 
-$id = filter_input(INPUT_GET, 'id');
-if ($id) {
+    require 'config.php';
+    require 'dao/UsuarioDaoMysql.php';
 
-    $info = [];
-    $pdo = new PDO("mysql:dbname=rodr7545_gerencia_easy;host=rodrigoflorenciodev.com.br", "rodr7545_dbTeste", "@#Feeling21");
+    $usuarioDao = new UsuarioDaoMysql($pdo);
 
-    $sql = $pdo->prepare("DELETE FROM funcionario_teste WHERE id = :id");
-    $sql->bindParam(':id', $id);
-    $sql->execute();
+    $id = filter_input(INPUT_GET, 'id');
 
-    header("Location: index.php");
-    exit;
-    
-} else {
-    header("Location: index.php");
-    exit;
-}
+    if ($id) {
+
+        $funcionario = $usuarioDao->delete($id);
+
+        header("Location: index.php");
+        exit;
+        
+    } else {
+        header("Location: index.php");
+        exit;
+    }
 
 ?>

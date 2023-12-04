@@ -27,31 +27,21 @@
 
     <?php
 
-    /* session_start();
+    require 'config.php';
+    require 'dao/UsuarioDaoMysql.php';
 
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    $usuarioDao = new UsuarioDaoMysql($pdo);
 
-        header("Location: login.php");
-        exit();
-    } */
-
+    $funcionario = false;
     $id = filter_input(INPUT_GET, 'id');
+
     if ($id) {
 
-        $info = [];
-        $pdo = new PDO("mysql:dbname=rodr7545_gerencia_easy;host=rodrigoflorenciodev.com.br", "rodr7545_dbTeste", "@#Feeling21");
+        $funcionario = $usuarioDao->findById($id);
 
-        $sql = $pdo->prepare("SELECT * FROM funcionario_teste WHERE id = :id");
-        $sql->bindParam(':id', $id);
-        $sql->execute();
+    }
 
-        if ($sql->rowCount() > 0) {
-            $info = $sql->fetch(PDO::FETCH_ASSOC);
-        } else {
-            header("Location: index.php");
-            exit;
-        }
-    } else {
+    if ($funcionario === false) {
         header("Location: index.php");
         exit;
     }
@@ -76,34 +66,27 @@
 
         </div>
 
-        <?php
-        if (isset($_COOKIE['nomeUsuario'])) {
-            $nomeUser = $_COOKIE['nomeUsuario'];
-            echo "<p>" . $nomeUser . "</p>";
-        }
-        ?>
-
         <form method="POST" action="editar_action.php">
 
-            <input type="hidden" name="id" value="<?= $info['id']; ?>">
+            <input type="hidden" name="id" value="<?= $funcionario->getId(); ?>">
 
             <div class="row formulario">
 
                 <div class="col-3">
 
-                    <input type="text" name="nome" value="<?= $info['nome']; ?>">
+                    <input type="text" name="nome" value="<?=  $funcionario->getNome(); ?>">
 
                 </div>
 
                 <div class="col-3">
 
-                    <input type="text" name="email" value="<?= $info['email']; ?>">
+                    <input type="text" name="email" value="<?=  $funcionario->getEmail(); ?>">
 
                 </div>
 
                 <div class="col-3">
 
-                    <input type="text" name="telefone" value="<?= $info['telefone']; ?>">
+                    <input type="text" name="telefone" value="<?=  $funcionario->getTelefone(); ?>">
 
                 </div>
 
