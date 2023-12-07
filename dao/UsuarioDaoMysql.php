@@ -1,6 +1,15 @@
 <?php
 
-require_once 'models/Usuario.php';
+spl_autoload_register(function ($class_name) {
+    $file = 'models/' . $class_name . '.php';
+    if (file_exists($file)) {
+        include $file;
+    } else {
+        // Trate o erro aqui, por exemplo:
+        echo "Classe $class_name não encontrada!";
+    }
+});
+
 
 class UsuarioDaoMysql implements UsuarioDAO {
 
